@@ -1,0 +1,16 @@
+{
+  "name": "events-distributor",
+  "version": "1.0.0",
+  "description": "System to help components and Micro UI applications to communicate between each other",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },,
+  "repository": {
+    "type": "git",
+    "url": "the repositories url"
+  },
+  "keywords": [],
+  "author": "Raul Rodriguez Proenza <raul.r.proenza@gmail.com> (https://github.com/rproenza86)",
+  "license": "GNU GPLv3"
+}
