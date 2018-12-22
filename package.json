@@ -1,16 +1,33 @@
 {
-  "name": "events-distributor",
+  "name": "@rproenza/events-distributor",
   "version": "1.0.0",
   "description": "System to help components and Micro UI applications to communicate between each other",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },,
+    "build": "tsc",
+    "test": "npm run build && mocha --reporter spec",
+    "publish": "npm publish --access public"
+  },
   "repository": {
     "type": "git",
-    "url": "the repositories url"
+    "url": "git+https://github.com/rproenza86/events-distributor.git"
   },
   "keywords": [],
   "author": "Raul Rodriguez Proenza <raul.r.proenza@gmail.com> (https://github.com/rproenza86)",
-  "license": "GNU GPLv3"
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/rproenza86/events-distributor/issues"
+  },
+  "homepage": "https://github.com/rproenza86/events-distributor#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "redux": "^4.0.1"
+  },
+  "directories": {
+    "test": "test"
+  }
 }
