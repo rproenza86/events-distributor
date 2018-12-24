@@ -34,6 +34,40 @@ const appA = {
 };
 ```
 
+### Events
+
+Object passed as parameter  to the `dispatch` function.
+
+> The `events` objects are like Redux's actions. They could hold any structure but there is a preferred framework which will ensure the proper module functioning under good practices.
+
+Ex. of a basic and well structured event:
+
+```javascript
+// Applications
+const event = {
+  type: 'UPDATE_TEST_DRIVE_DAY',
+  payload:{
+      date:  '2018-12-21T05:00:00.000Z'
+  },
+  meta: {
+    appSource: 'AppointmentDatePicker',
+    eventType: 'BROAD_CAST_ACTION',
+    state: {
+      testDrive: {
+        day: '2018-12-21T05:00:00.000Z',
+        email: 'Raul@gmail.com',
+        firstName: 'Raul',
+        hasError: false,
+        isCalculating: false,
+        lastName: 'Proenza',
+        phone: '123-624-4321',
+        time: 'Morning'
+      }
+    }
+  }
+};
+```
+
 ## Installation
 ```sh
 npm install @rproenza/events-distributor --save

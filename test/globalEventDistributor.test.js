@@ -77,20 +77,36 @@ describe('The EventDistribution module', () => {
         expect(directEventCatchByAppB.type).to.equal(DIRECT_EVENT_TO_APP_B);
         expect(directEventCatchByAppB.meta).to.equal('Event catch on B');
     });
-    describe('should', () => {
-        it('have two broadcasted  events already distributed', () => {
-            const broadcastedEvents = eventCatchQueue.filter(event => (event.type === BROAD_CAST_EVENT));
+    describe('the broadcast event feature', () => {
+        it('should have distributed two events already ', () => {
+            const broadcastedEvents = eventCatchQueue.filter(
+                event => event.type === BROAD_CAST_EVENT
+            );
             expect(broadcastedEvents.length).to.equal(2);
         });
-        it('AppA have received a broadcasted event', () => {
+        it('should have sent  a broadcasted event to AppA', () => {
             const eventCatchOnA = eventCatchQueue[0];
             expect(eventCatchOnA.type).to.equal('BROAD_CAST_EVENT');
             expect(eventCatchOnA.meta).to.equal('Event catch on A');
         });
-        it('AppB have received a broadcasted event', () => {
+        it('should have sent  a broadcasted event to AppB', () => {
             const eventCatchOnB = eventCatchQueue[1];
             expect(eventCatchOnB.type).to.equal('BROAD_CAST_EVENT');
             expect(eventCatchOnB.meta).to.equal('Event catch on B');
+        });
+        it('should omit app emitter from broadcast when meta info present on event', () => {
+            const eventWithMetaInfo = {
+                ...broadCastEvent,
+                payload: {
+                    msg: 'Message from A to the world'
+                },
+                meta: { appSource: appA.name, eventType: 'BROAD_CAST_ACTION' }
+            };
+            EvenDistributor.dispatch(eventWithMetaInfo);
+            const broadcastedEventsToAppB = eventCatchQueue.filter(event => {
+                return event.type === BROAD_CAST_EVENT && event.meta === 'Event catch on B' && event.payload.msg === 'Message from A to the world';
+            });
+            expect(broadcastedEventsToAppB.length).to.equal(1);
         });
     });
 });

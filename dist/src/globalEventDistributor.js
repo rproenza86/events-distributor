@@ -9,12 +9,16 @@ var GlobalEventDistributor = /** @class */ (function () {
     };
     GlobalEventDistributor.prototype.dispatch = function (event, appTarget) {
         if (appTarget === void 0) { appTarget = ''; }
+        if (!event) {
+            return false;
+        }
         if (appTarget) {
             this.dispatchByAppName(event, appTarget);
         }
         else {
             this.broadCastEvent(event);
         }
+        return true;
     };
     GlobalEventDistributor.prototype.dispatchByAppName = function (event, appTarget) {
         this.stores.map(function (s) {
@@ -24,7 +28,11 @@ var GlobalEventDistributor = /** @class */ (function () {
         });
     };
     GlobalEventDistributor.prototype.broadCastEvent = function (event) {
-        this.stores.forEach(function (s) { return s.store.dispatch(event); });
+        var appNameOfEventEmitter = (event && event.meta && event.meta.appSource) || '';
+        var storesExcludingEventEmitter = this.stores.filter(function (store) {
+            return store.appName !== appNameOfEventEmitter;
+        });
+        storesExcludingEventEmitter.forEach(function (s) { return s.store.dispatch(event); });
     };
     return GlobalEventDistributor;
 }());

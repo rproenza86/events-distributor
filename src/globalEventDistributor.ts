@@ -17,11 +17,15 @@ export class GlobalEventDistributor {
     }
 
     public dispatch(event: any, appTarget: string = '') {
+        if (!event) {
+            return false;
+        }
         if (appTarget) {
             this.dispatchByAppName(event, appTarget);
         } else {
             this.broadCastEvent(event);
         }
+        return true;
     }
 
     private dispatchByAppName(event: any, appTarget: string) {
@@ -33,6 +37,10 @@ export class GlobalEventDistributor {
     }
 
     private broadCastEvent(event: any) {
-        this.stores.forEach(s => s.store.dispatch(event));
+        const appNameOfEventEmitter = (event && event.meta && event.meta.appSource) || '';
+        const storesExcludingEventEmitter = this.stores.filter(store => {
+            return store.appName !== appNameOfEventEmitter
+        });
+        storesExcludingEventEmitter.forEach(s => s.store.dispatch(event));
     }
 }
