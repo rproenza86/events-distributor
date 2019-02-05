@@ -4,8 +4,22 @@ var GlobalEventDistributor = /** @class */ (function () {
     function GlobalEventDistributor() {
         this.stores = [];
     }
-    GlobalEventDistributor.prototype.registerStore = function (appName, store) {
-        this.stores.push({ appName: appName, store: store });
+    GlobalEventDistributor.prototype.getState = function (appTarget) {
+        if (appTarget === void 0) { appTarget = ''; }
+        var searchCondition = !!appTarget
+            ? function (store) { return store.appName === appTarget; }
+            : function (store) { return store.itIsHostApp === true; };
+        var state;
+        this.stores.map(function (store) {
+            if (searchCondition(store)) {
+                state = store.store.getState();
+            }
+        });
+        return state;
+    };
+    GlobalEventDistributor.prototype.registerStore = function (appName, store, itIsHostApp) {
+        if (itIsHostApp === void 0) { itIsHostApp = false; }
+        this.stores.push({ appName: appName, store: store, itIsHostApp: itIsHostApp });
     };
     GlobalEventDistributor.prototype.dispatch = function (event, appTarget) {
         if (appTarget === void 0) { appTarget = ''; }

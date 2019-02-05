@@ -3,6 +3,7 @@ import { Store } from 'redux';
 interface IDistributorStore {
     appName: string;
     store: Store | any;
+    itIsHostApp: boolean;
 }
 
 export class GlobalEventDistributor {
@@ -12,8 +13,23 @@ export class GlobalEventDistributor {
         this.stores = [];
     }
 
-    public registerStore(appName: string, store: Store) {
-        this.stores.push({ appName, store });
+    public getState(appTarget: string = '') {
+        const searchCondition = !!appTarget
+            ? (store: IDistributorStore) => store.appName === appTarget
+            : (store: IDistributorStore) => store.itIsHostApp === true;
+        let state: any;
+
+        this.stores.map(store => {
+            if (searchCondition(store)) {
+                state = store.store.getState();
+            }
+        });
+
+        return state;
+    }
+
+    public registerStore(appName: string, store: Store, itIsHostApp: boolean = false) {
+        this.stores.push({ appName, store, itIsHostApp });
     }
 
     public dispatch(event: any, appTarget: string = '') {
@@ -39,7 +55,7 @@ export class GlobalEventDistributor {
     private broadCastEvent(event: any) {
         const appNameOfEventEmitter = (event && event.meta && event.meta.appSource) || '';
         const storesExcludingEventEmitter = this.stores.filter(store => {
-            return store.appName !== appNameOfEventEmitter
+            return store.appName !== appNameOfEventEmitter;
         });
         storesExcludingEventEmitter.forEach(s => s.store.dispatch(event));
     }
