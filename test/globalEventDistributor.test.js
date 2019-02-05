@@ -14,6 +14,14 @@ const appA = {
                 meta: 'Event catch on A'
             };
             eventCatchQueue.push(appACatch);
+        },
+        getState: function() {
+            return {
+                appConfig: {
+                    appName: 'MicroAppA'
+                }
+            };
+            eventCatchQueue.push(appACatch);
         }
     }
 };
@@ -24,6 +32,14 @@ const appB = {
             const appACatch = {
                 ...event,
                 meta: 'Event catch on B'
+            };
+            eventCatchQueue.push(appACatch);
+        },
+        getState: function() {
+            return {
+                appConfig: {
+                    appName: 'MicroAppB'
+                }
             };
             eventCatchQueue.push(appACatch);
         }
@@ -57,7 +73,7 @@ describe('The EventDistribution module', () => {
         // EventDistributor instantiation
         EvenDistributor = new GlobalEventDistributor();
         // Apps registrations
-        EvenDistributor.registerStore(appA.name, appA.store);
+        EvenDistributor.registerStore(appA.name, appA.store, true);
         EvenDistributor.registerStore(appB.name, appB.store);
         // Broadcast event
         EvenDistributor.dispatch(broadCastEvent);
@@ -77,7 +93,7 @@ describe('The EventDistribution module', () => {
         expect(directEventCatchByAppB.type).to.equal(DIRECT_EVENT_TO_APP_B);
         expect(directEventCatchByAppB.meta).to.equal('Event catch on B');
     });
-    describe('the broadcast event feature', () => {
+    describe('with the broadcast event feature', () => {
         it('should have distributed two events already ', () => {
             const broadcastedEvents = eventCatchQueue.filter(
                 event => event.type === BROAD_CAST_EVENT
@@ -104,9 +120,31 @@ describe('The EventDistribution module', () => {
             };
             EvenDistributor.dispatch(eventWithMetaInfo);
             const broadcastedEventsToAppB = eventCatchQueue.filter(event => {
-                return event.type === BROAD_CAST_EVENT && event.meta === 'Event catch on B' && event.payload.msg === 'Message from A to the world';
+                return (
+                    event.type === BROAD_CAST_EVENT &&
+                    event.meta === 'Event catch on B' &&
+                    event.payload.msg === 'Message from A to the world'
+                );
             });
             expect(broadcastedEventsToAppB.length).to.equal(1);
+        });
+    });
+    describe('with the get state feature', () => {
+        it('should get state from parent app if not passed appName param', () => {
+            const state = EvenDistributor.getState();
+
+            const parentAppStateFromEventDistributor = JSON.stringify(state);
+            const appAState = JSON.stringify(appA.store.getState());
+
+            expect(parentAppStateFromEventDistributor).to.equal(appAState);
+        });
+        it('should get state from appB when passed its name as param', () => {
+            const state = EvenDistributor.getState(appB.name);
+
+            const appBStateFromEventDistributor = JSON.stringify(state);
+            const appBState = JSON.stringify(appB.store.getState());
+
+            expect(appBStateFromEventDistributor).to.equal(appBState);
         });
     });
 });
