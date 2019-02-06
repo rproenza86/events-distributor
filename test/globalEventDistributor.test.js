@@ -88,6 +88,10 @@ describe('The EventDistribution module', () => {
         const registeredAppB = EvenDistributor.stores.filter(store => store.appName === appB.name);
         expect(registeredAppB.length).to.equal(1);
     });
+    it('should not register app B twice', () => {
+        EvenDistributor.registerStore(appB.name, appB.store);
+        expect(EvenDistributor.stores.length).to.equal(2);
+    });
     it('should dispatch event to app B', () => {
         const directEventCatchByAppB = eventCatchQueue[2];
         expect(directEventCatchByAppB.type).to.equal(DIRECT_EVENT_TO_APP_B);

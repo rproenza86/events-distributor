@@ -2,7 +2,7 @@ import { Store } from 'redux';
 
 interface IDistributorStore {
     appName: string;
-    store: Store | any;
+    store: Store<any> | any;
     itIsHostApp: boolean;
 }
 
@@ -28,8 +28,29 @@ export class GlobalEventDistributor {
         return state;
     }
 
-    public registerStore(appName: string, store: Store, itIsHostApp: boolean = false) {
-        this.stores.push({ appName, store, itIsHostApp });
+    public getStore(appTarget: string) {
+        let store: any;
+
+        if (appTarget) {
+            this.stores.map(registeredAppStore => {
+                if (registeredAppStore.appName === appTarget) {
+                    store = registeredAppStore.store;
+                }
+            });
+        }
+
+        return store;
+    }
+
+    public isStoreRegistered(storeAppName: string) {
+        const filteredStore = this.stores.filter(store => store.appName === storeAppName);
+        return filteredStore.length > 0;
+    }
+
+    public registerStore(appName: string, store: Store<any>, itIsHostApp: boolean = false) {
+        if (!this.isStoreRegistered(appName)) {
+            this.stores.push({ appName, store, itIsHostApp });
+        }
     }
 
     public dispatch(event: any, appTarget: string = '') {
