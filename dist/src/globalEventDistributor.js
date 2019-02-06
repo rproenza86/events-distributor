@@ -17,9 +17,26 @@ var GlobalEventDistributor = /** @class */ (function () {
         });
         return state;
     };
+    GlobalEventDistributor.prototype.getStore = function (appTarget) {
+        var store;
+        if (appTarget) {
+            this.stores.map(function (registeredAppStore) {
+                if (registeredAppStore.appName === appTarget) {
+                    store = registeredAppStore.store;
+                }
+            });
+        }
+        return store;
+    };
+    GlobalEventDistributor.prototype.isStoreRegistered = function (storeAppName) {
+        var filteredStore = this.stores.filter(function (store) { return store.appName === storeAppName; });
+        return filteredStore.length > 0;
+    };
     GlobalEventDistributor.prototype.registerStore = function (appName, store, itIsHostApp) {
         if (itIsHostApp === void 0) { itIsHostApp = false; }
-        this.stores.push({ appName: appName, store: store, itIsHostApp: itIsHostApp });
+        if (!this.isStoreRegistered(appName)) {
+            this.stores.push({ appName: appName, store: store, itIsHostApp: itIsHostApp });
+        }
     };
     GlobalEventDistributor.prototype.dispatch = function (event, appTarget) {
         if (appTarget === void 0) { appTarget = ''; }
