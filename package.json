@@ -11,6 +11,20 @@
     "prepublish": "npm run build && mocha",
     "publish": "npm publish --access public"
   },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "watermarks": {
+      "lines": [80, 95],
+      "functions": [80, 95],
+      "branches": [80, 95],
+      "statements": [80, 95]
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rproenza86/events-distributor.git"
