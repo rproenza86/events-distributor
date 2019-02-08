@@ -1,4 +1,5 @@
 # events-distributor
+[![Build Status](https://travis-ci.org/rproenza86/events-distributor.svg?branch=master)](https://travis-ci.org/rproenza86/events-distributor)
 
 ## Description
 
