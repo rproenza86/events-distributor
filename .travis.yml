@@ -5,7 +5,7 @@ dist: trusty
 cache: npm
 branches:
   only:  # Creates a whitelist.  Any branch not in this list will not build.
-    - master 
+    - master
 install:
   - npm ci
 script:
