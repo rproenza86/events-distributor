@@ -12,7 +12,7 @@ This Node.js module would work as a helper to support Micro UI architectures all
 
 ## Module concepts
 
-This module was inspired by (redux)[https://redux.js.org] and its actions communication system.
+This module was inspired by [redux](https://redux.js.org) and its actions communication system.
 
 ### Concepts
 
