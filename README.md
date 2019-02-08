@@ -1,6 +1,7 @@
 # events-distributor
 [![Build Status](https://travis-ci.org/rproenza86/events-distributor.svg?branch=master)](https://travis-ci.org/rproenza86/events-distributor)
 [![Code Factor/Quality](https://www.codefactor.io/repository/github/rproenza86/events-distributor/badge)](https://www.codefactor.io/repository/github/rproenza86/events-distributor)
+[![Coverage Status](https://coveralls.io/repos/github/rproenza86/events-distributor/badge.svg?branch=master)](https://coveralls.io/github/rproenza86/events-distributor?branch=master)
 [![npm (scoped)](https://img.shields.io/npm/v/@rproenza/events-distributor.svg)](https://www.npmjs.com/package/@rproenza/events-distributor)
 [![npm](https://img.shields.io/npm/dt/@rproenza/events-distributor.svg)](https://www.npmjs.com/package/@rproenza/events-distributor)
 [![license](https://img.shields.io/github/license/rproenza86/events-distributor.svg)](https://github.com/rproenza86/events-distributor/blob/master/LICENSE)
@@ -12,7 +13,7 @@ This Node.js module would work as a helper to support Micro UI architectures all
 
 ## Module concepts
 
-This module was inspired by (redux)[https://redux.js.org] and its actions communication system.
+This module was inspired by [redux](https://redux.js.org) and its actions communication system.
 
 ### Concepts
 

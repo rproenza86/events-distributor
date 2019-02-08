@@ -114,6 +114,9 @@ describe('The EventDistribution module', () => {
             expect(eventCatchOnB.type).to.equal('BROAD_CAST_EVENT');
             expect(eventCatchOnB.meta).to.equal('Event catch on B');
         });
+        it('should not send any event', () => {
+            expect(EvenDistributor.dispatch()).to.equal(false);
+        });
         it('should omit app emitter from broadcast when meta info present on event', () => {
             const eventWithMetaInfo = {
                 ...broadCastEvent,
@@ -149,6 +152,18 @@ describe('The EventDistribution module', () => {
             const appBState = JSON.stringify(appB.store.getState());
 
             expect(appBStateFromEventDistributor).to.equal(appBState);
+        });
+    });
+    describe('with the get store feature', () => {
+        it('should get store from a registered app given its appName', () => {
+            const storeA = EvenDistributor.getStore(appA.name);
+
+            expect(storeA).to.equal(appA.store);
+        });
+        it('should not get any store when the appName param is missed', () => {
+            const missedStore = EvenDistributor.getStore();
+
+            expect(missedStore).to.equal(undefined);
         });
     });
 });
