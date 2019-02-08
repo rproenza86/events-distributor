@@ -14,7 +14,7 @@ export class GlobalEventDistributor {
     }
 
     public getState(appTarget: string = '') {
-        const searchCondition = !!appTarget
+        const searchCondition = appTarget
             ? (store: IDistributorStore) => store.appName === appTarget
             : (store: IDistributorStore) => store.itIsHostApp === true;
         let state: any;
