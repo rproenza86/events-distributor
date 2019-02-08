@@ -1,13 +1,20 @@
 language: node_js
 node_js:
-  - "node"
+- node
 dist: trusty
 cache: npm
 branches:
-  only:  # Creates a whitelist.  Any branch not in this list will not build.
-    - master
+  only:
+  - master
 install:
-  - npm ci
+- npm ci
 script:
-  - npm test
+- npm test
 after_success: npm run coverage
+deploy:
+  provider: npm
+  email: rproenza86@gmail.com
+  api_key:
+    secure: sPqDnrdJEEKZxZqWGApTYz3B6aprvq2Zamu7hZhz6ljzfyMP2syrLqZtsz62g92fdtylyhuqjBVdqOBUAEMZNL7V1FouWoT8iObzNkWmzuJ+1UVIhuFynfhhG6bbvT7isDGypvJjDscz9BUXzBC92W2BfXFOuU/ZYHCa+NXPWnMEvA5k75gyFNl63ee3U3XPkE0xl88XGYWFkkkcunlCCbMFecFsZS/h6SDviDus9Pz7xyjzWlECakp31qlPXKLPH5b5KuXRbCM7KRZbJx9nSmSlupbArRAZ24N57yqZdtOSUuipULdFbBfaYzLIvurmphHU8A+LDn60g0UhjOzLAN4XOgZ4VssXQAePHfNNT29Pzb1IuPyVisjjhaPvhA2UIA/Dk2TY04MB0Wzo04xl8I5xdobdwN5rEE5ycZa8Yrkeigfs6zfZRAQRr6VIkT6fQTgzDk/5nvjP/zd4DSIjBw5zZUHe6dsY1M6EH+OrHZqfRCLtwJmwSa9ayifUjoNIuz1iVyWvG8GJMNJrQ0hOhRNeAXFop01C9XXNsPpezMsUWZ2DT2j5ZYzDnlx2bEMhVK6LGcZx8U4KdbE+1D5mewXVVfoLMPKr95RHMp5K533emMULedQGrKVhQlLwMKfOrC5UoykfhQlrVayIyue/xu6F/n/B/kgEwa5cSJq2p1g=
+  on:
+    branch: master
