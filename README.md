@@ -1,5 +1,9 @@
 # events-distributor
 [![Build Status](https://travis-ci.org/rproenza86/events-distributor.svg?branch=master)](https://travis-ci.org/rproenza86/events-distributor)
+[![npm (scoped)](https://img.shields.io/npm/v/@rproenza/events-distributor.svg)](https://www.npmjs.com/package/@rproenza/events-distributor)
+[![npm](https://img.shields.io/npm/dt/@rproenza/events-distributor.svg)](https://www.npmjs.com/package/@rproenza/events-distributor)
+[![license](https://img.shields.io/github/license/rproenza86/events-distributor.svg)](https://github.com/rproenza86/events-distributor/blob/master/LICENSE)
+
 
 ## Description
 
