@@ -6,7 +6,7 @@ var GlobalEventDistributor = /** @class */ (function () {
     }
     GlobalEventDistributor.prototype.getState = function (appTarget) {
         if (appTarget === void 0) { appTarget = ''; }
-        var searchCondition = !!appTarget
+        var searchCondition = appTarget
             ? function (store) { return store.appName === appTarget; }
             : function (store) { return store.itIsHostApp === true; };
         var state;
