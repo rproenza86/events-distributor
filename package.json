@@ -8,7 +8,6 @@
     "watch": "tsc -w",
     "test": "nyc --reporter=html --reporter=text  mocha --reporter spec",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "publish": "npm publish --access public",
     "local-publish": "npm run build && npm run test && npm publish --access public"
   },
   "nyc": {
