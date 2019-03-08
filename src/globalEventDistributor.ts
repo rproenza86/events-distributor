@@ -72,7 +72,7 @@ export class GlobalEventDistributor {
      *
      * @param appTarget is optional. When omitted, the event will be send to the
      * parent app.
-     * 
+     *
      */
     public dispatch(event: any, appTarget: string = '') {
         if (!event) {
