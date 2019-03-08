@@ -81,7 +81,7 @@ eventDistributor.dispatch(eventToBroadCast);
 eventDistributor.dispatch(directEventToAppB, appB.name);
 ```
 
-#### Get an application state
+### Get an application state
 
 ```typescript
 /**
