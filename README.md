@@ -33,7 +33,7 @@ yarn add @rproenza/events-distributor
 ```
 
 
-## How to use
+## Usage
 
 ### Module instantiation
 
