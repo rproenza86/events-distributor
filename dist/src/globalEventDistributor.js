@@ -4,6 +4,14 @@ var GlobalEventDistributor = /** @class */ (function () {
     function GlobalEventDistributor() {
         this.stores = [];
     }
+    /**
+     * Returns an object containing an app state.
+     *
+     * If apps' names does not match the appName passed as param it will
+     * return the `undefined` object.
+     *
+     * @return The default return it's the state the one of the registered as parent app.
+     */
     GlobalEventDistributor.prototype.getState = function (appTarget) {
         if (appTarget === void 0) { appTarget = ''; }
         var searchCondition = appTarget
@@ -32,12 +40,26 @@ var GlobalEventDistributor = /** @class */ (function () {
         var filteredStore = this.stores.filter(function (store) { return store.appName === storeAppName; });
         return filteredStore.length > 0;
     };
+    /**
+     * Register an Micro UI store into the system.
+     *
+     * @param itIsHostApp should be use just once to register the parent app.
+     * The rest of the time should be omitted.
+     *
+     */
     GlobalEventDistributor.prototype.registerStore = function (appName, store, itIsHostApp) {
         if (itIsHostApp === void 0) { itIsHostApp = false; }
         if (!this.isStoreRegistered(appName)) {
             this.stores.push({ appName: appName, store: store, itIsHostApp: itIsHostApp });
         }
     };
+    /**
+     * Broadcast event or send event to an specific app.
+     *
+     * @param appTarget is optional. When omitted, the event will be send to the
+     * parent app.
+     *
+     */
     GlobalEventDistributor.prototype.dispatch = function (event, appTarget) {
         if (appTarget === void 0) { appTarget = ''; }
         if (!event) {

@@ -1,4 +1,5 @@
 # events-distributor
+
 [![Build Status](https://travis-ci.org/rproenza86/events-distributor.svg?branch=master)](https://travis-ci.org/rproenza86/events-distributor)
 [![Code Factor/Quality](https://www.codefactor.io/repository/github/rproenza86/events-distributor/badge)](https://www.codefactor.io/repository/github/rproenza86/events-distributor)
 [![Coverage Status](https://coveralls.io/repos/github/rproenza86/events-distributor/badge.svg?branch=master)](https://coveralls.io/github/rproenza86/events-distributor?branch=master)
@@ -6,16 +7,105 @@
 [![npm](https://img.shields.io/npm/dt/@rproenza/events-distributor.svg)](https://www.npmjs.com/package/@rproenza/events-distributor)
 [![license](https://img.shields.io/github/license/rproenza86/events-distributor.svg)](https://github.com/rproenza86/events-distributor/blob/master/LICENSE)
 
+> System to enable communication between Micro UI/Frontend applications
 
 ## Description
 
-This Node.js module would work as a helper to support Micro UI architectures allowing the event communications among apps or modules.
+Node.js package to use as NPM module. It will work as a helper utility to support Micro UI/Frontend architectures allowing the event communications among applications or modules.
 
-## Module concepts
+The use of the `events-distributor` enable the proper encapsulation, low coupling and high cohesion which all scalable system must to have in order to achieve total indecency on his release train and Software Development Life Circle.
 
-This module was inspired by [redux](https://redux.js.org) and its actions communication system.
+## Table of Contents
 
-### Concepts
+> If you're `README` has a lot of info, section headers might be nice.
+
+- [Installation](#installation)
+- [How to use](#usage)
+- [Test](#test)
+- [Contributing](#contributing)
+- [Concepts](#concepts)
+- [Support](#support)
+- [License](#license)
+
+## Installation
+```sh
+npm install @rproenza/events-distributor --save
+
+yarn add @rproenza/events-distributor
+```
+
+
+## How to use
+
+### Module instantiation
+
+```javascript
+import GlobalEventDistributor from '@rproenza/events-distributor';
+
+const eventDistributor = new GlobalEventDistributor();
+```
+
+### Application registration
+
+```javascript
+/**
+ * appStore = {
+ *    dispatch: () => {},
+ *    getStore: () => {}
+ * }
+*/
+eventDistributor.registerStore(appName, appStore);
+```
+
+### Events communications
+
+#### Broadcasting event
+
+```javascript
+/**
+ * eventToBroadCast = {
+ *    type: 'YOUR_GREAT_ACTION_SUCCESS,
+ *    payload: {}
+ * }
+*/
+eventDistributor.dispatch(eventToBroadCast);
+```
+
+#### Sent event to specific application
+
+```javascript
+/**
+ * directEventToAppB = {
+ *    type: 'YOUR_GREAT_APP_A_ACTION_SUCCESS,
+ *    payload: {}
+ * }
+*/
+eventDistributor.dispatch(directEventToAppB, appB.name);
+```
+
+#### Get an application state
+
+```typescript
+/**
+ * The function parameter is optional.
+ * If omitted it will be returned the parent's app state
+*/
+eventDistributor.getState(appTarget: string = '');
+```
+
+## Test
+
+```sh
+npm run test
+```
+
+## Contributing
+
+*(see [Contributing Doc](CONTRIBUTING.md))
+
+## Concepts
+
+> This module was inspired by [redux](https://redux.js.org) and its actions communication system.
 
 ### Store
 
@@ -75,46 +165,15 @@ const event = {
 };
 ```
 
-## Installation
-```sh
-npm install @rproenza/events-distributor --save
+## Support
 
-yarn add @rproenza/events-distributor
-```
+ Create an [Issue](https://github.com/rproenza86/events-distributor/issues) for any bug or feature request.
 
-## Usage
+ Expect a response within 2 business days after submitted your [bug report or feature request](https://github.com/rproenza86/events-distributor/issues). However, in many cases you'll see a response within 24 hours.
 
-### Javascript
+## License
 
-```javascript
-var eventsDistributorModule = require('@rproenza/events-distributor');
+[![license](https://img.shields.io/github/license/rproenza86/events-distributor.svg)](https://github.com/rproenza86/events-distributor/blob/master/LICENSE)
 
-var GlobalEventDistributor = eventsDistributorModule.default;
-var EventDistributor = new GlobalEventDistributor();
-
-// Apps registrations
-EventDistributor.registerStore(appA.name, appA.store);
-// Broadcast event
-EventDistributor.dispatch(broadCastEvent);
-// Sent event to specific app
-EventDistributor.dispatch(directEventForAppB, appB.name);
-```
-
-### TypeScript
-```typescript
-import GlobalEventDistributor from '@rproenza/events-distributor';
-
-const EventDistributor = new GlobalEventDistributor();
-
-// Apps registrations
-EventDistributor.registerStore(appA.name, appA.store);
-// Broadcast event
-EventDistributor.dispatch(broadCastEvent);
-// Sent event to specific app
-EventDistributor.dispatch(directEventForAppB, appB.name);
-```
-
-## Test
-```sh
-npm run test
-```
+- **[GNU General Public License version 3](LICENSE)**
+- Copyright 2025 © <a href="https://atomiccoders.com" target="_blank">Atomic Coders</a>.
