@@ -17,8 +17,6 @@ The use of the `events-distributor` enable the proper encapsulation, low couplin
 
 ## Table of Contents
 
-> If you're `README` has a lot of info, section headers might be nice.
-
 - [Installation](#installation)
 - [How to use](#usage)
 - [Test](#test)
