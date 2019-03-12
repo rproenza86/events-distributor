@@ -32,7 +32,6 @@ npm install @rproenza/events-distributor --save
 yarn add @rproenza/events-distributor
 ```
 
-
 ## Usage
 
 ### Module instantiation
