@@ -66,5 +66,8 @@
       "pre-commit": "npm run build && npm run test",
       "pre-push": "npm run test"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
